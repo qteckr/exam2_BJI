@@ -15,7 +15,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button m_btn_stock_report = null;
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     objListReport espresso_sell;
     objListReport latte_sell;
     objListReport americano_sell;
+
+    SimpleDateFormat format2 = new SimpleDateFormat ( "yyyy년 MM월dd일 HH시mm분ss초");
+    Date time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
