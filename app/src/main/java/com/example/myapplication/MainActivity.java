@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         m_rv_list.setAdapter(m_adapter_report);
         m_adapter_report.notifyDataSetChanged();
         m_rv_sale_list.setVisibility(View.VISIBLE);
+        m_rv_sale_list.scrollToPosition(0);
         m_adapter_sale.notifyDataSetChanged();
 
     }
