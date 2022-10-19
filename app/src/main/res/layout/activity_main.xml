@@ -19,24 +19,24 @@
             android:layout_marginTop="25dp">
 
             <Button
-                android:id="@+id/btn_menu1"
+                android:id="@+id/btn_stock_report"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="60dp"
                 android:textSize="20dp"
-                android:text="메뉴1"
+                android:text="재료보고"
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp" />
 
             <Button
-                android:id="@+id/btn_menu2"
+                android:id="@+id/btn_sale_report"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="60dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
                 android:textSize="20dp"
-                android:text="메뉴2"/>
+                android:text="정산보고"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,33 +46,33 @@
             >
 
             <Button
-                android:id="@+id/btn_menu3"
+                android:id="@+id/btn_select_espresso"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="60dp"
-                android:textSize="20dp"
-                android:text="메뉴3"
+                android:textSize="15dp"
+                android:text="에스프레소"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="15dp" />
 
             <Button
-                android:id="@+id/btn_menu4"
+                android:id="@+id/btn_select_latte"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="60dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:textSize="20dp"
-                android:text="메뉴4"/>
+                android:text="라떼"/>
             <Button
-                android:id="@+id/btn_menu5"
+                android:id="@+id/btn_select_americano"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="60dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="10dp"
-                android:textSize="20dp"
-                android:text="메뉴5"/>
+                android:textSize="15dp"
+                android:text="아메리카노"/>
         </LinearLayout>
 
         <LinearLayout
@@ -85,7 +85,7 @@
                 android:id="@+id/tv_label"
                 android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="100dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="10dp"
                 android:textSize="20dp"

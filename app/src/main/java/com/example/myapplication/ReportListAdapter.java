@@ -9,14 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ExamListAdapter extends RecyclerView.Adapter<ExamListAdapter.CustomViewHolder> {
+import java.util.ArrayList;
 
-    Context mContext = null;
-    LayoutInflater mLayoutInflater = null;
+public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.CustomViewHolder> {
 
+    Context mContext;
+    LayoutInflater mLayoutInflater;
 
-    public ExamListAdapter(Context context) {
+    ArrayList<objListReport> arrayReport;
+
+    public ReportListAdapter(ArrayList<objListReport> arrayReport, Context context) {
         this.mContext = context;
+        this.arrayReport = arrayReport;
         this.mLayoutInflater = LayoutInflater.from(mContext);
     }
 
@@ -31,16 +35,20 @@ public class ExamListAdapter extends RecyclerView.Adapter<ExamListAdapter.Custom
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-        holder.m_tv_title.setText("title");
-        holder.m_tv_content.setText("content");
+        holder.m_tv_title.setText(String.valueOf(arrayReport.get(position).getMenu()));
+
+        holder.m_tv_content.setText(String.valueOf(arrayReport.get(position).getCnt()));
     }
 
     @Override
     public int getItemCount() {
+        if (arrayReport != null) {
+            return arrayReport.size();
+        }
         return 0;
     }
 
-    public class CustomViewHolder extends RecyclerView.ViewHolder {
+    public static class CustomViewHolder extends RecyclerView.ViewHolder {
 
         TextView m_tv_title;
         TextView m_tv_content;
