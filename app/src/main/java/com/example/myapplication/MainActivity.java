@@ -223,6 +223,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         stockArray.clear();
         reportArray.clear();
         m_adapter_stock.notifyDataSetChanged();
-        m_adapter_sale.notifyDataSetChanged();
+        m_adapter_report.notifyDataSetChanged();
     }
 }
