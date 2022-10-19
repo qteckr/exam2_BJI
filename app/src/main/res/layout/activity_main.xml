@@ -95,7 +95,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="10dp"
 
@@ -103,18 +103,18 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 >
             </androidx.recyclerview.widget.RecyclerView>
 
-<!--            <ListView-->
-<!--                android:id="@+id/lv_list"-->
-<!--                android:dividerHeight="0.5px"-->
-<!--                android:divider="#000000"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:textSize="20dp"-->
-<!--                />-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_sale_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                >
+            </androidx.recyclerview.widget.RecyclerView>
+
         </LinearLayout>
     </LinearLayout>
 

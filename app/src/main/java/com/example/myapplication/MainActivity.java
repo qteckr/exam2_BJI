@@ -29,10 +29,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView m_tv_label = null;
 
     RecyclerView m_rv_list = null;
-    RecyclerView.LayoutManager layoutManager;
+    RecyclerView m_rv_sale_list = null;
+    RecyclerView.LayoutManager layoutManager1;
+    RecyclerView.LayoutManager layoutManager2;
 
     ArrayList<objListStock> stockArray;
     ArrayList<objListReport> reportArray;
+    ArrayList<objListSale> saleArray;
 
     int coffee = 10000;
     int water = 10000;
@@ -50,15 +53,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     objListStock water_stock;
     ReportListAdapter m_adapter_report;
     StockListAdapter m_adapter_stock;
-
+    SaleReportListAdapter m_adapter_sale;
     objListReport espresso_sale;
     objListReport latte_sale;
     objListReport americano_sale;
-    objListReport espresso_sell;
-    objListReport latte_sell;
-    objListReport americano_sell;
+    objListSale sale_report;
 
-    SimpleDateFormat format2 = new SimpleDateFormat ( "yyyy년 MM월dd일 HH시mm분ss초");
+    SimpleDateFormat date_format = new SimpleDateFormat("yyyy년 MM월dd일 HH시mm분ss초");
     Date time;
 
     @Override
@@ -82,13 +83,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         m_tv_label = findViewById(R.id.tv_label);
         m_rv_list = findViewById(R.id.rv_list);
-        layoutManager = new LinearLayoutManager(this);
+        m_rv_sale_list = findViewById(R.id.rv_sale_list);
+
+        layoutManager1 = new LinearLayoutManager(this);
+        layoutManager2 = new LinearLayoutManager(this);
         reportArray = new ArrayList<objListReport>();
         stockArray = new ArrayList<objListStock>();
+        saleArray = new ArrayList<objListSale>();
 
         m_adapter_report = new ReportListAdapter(reportArray, this);
         m_adapter_stock = new StockListAdapter(stockArray, this);
-        m_rv_list.setLayoutManager(layoutManager);
+        m_adapter_sale = new SaleReportListAdapter(saleArray,this);
+
+        m_rv_list.setLayoutManager(layoutManager1);
+        m_rv_sale_list.setLayoutManager(layoutManager2);
+        m_rv_sale_list.setAdapter(m_adapter_sale);
 //        m_rv_list.setAdapter(m_adapter);
 
 
@@ -96,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        listClear();
         switch (view.getId()) {
             case R.id.btn_stock_report:
                 stockReport();
@@ -127,29 +137,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         stockArray.add(coffee_stock);
         stockArray.add(water_stock);
         stockArray.add(milk_stock);
-        m_rv_list.setLayoutManager(layoutManager);
+
         m_rv_list.setAdapter(m_adapter_stock);
         m_adapter_stock.notifyDataSetChanged();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void saleReport() {
         String profit = "총수익금 : " + (espresso_cost * saled_espresso_cnt + americano_cost * saled_americano_cnt + latte_cost * saled_latte_cnt) + "원";
-        espresso_sale = new objListReport("에스프레소 매출", saled_espresso_cnt * espresso_cost);
-        latte_sale = new objListReport("라떼 매출", saled_latte_cnt * latte_cost);
-        americano_sale = new objListReport("아메리카노 매출", saled_americano_cnt * americano_cost);
-        espresso_sell = new objListReport("에스프레소 판매량", saled_espresso_cnt);
-        latte_sell = new objListReport("라떼 판매량", saled_latte_cnt);
-        americano_sell = new objListReport("아메리카노 판매량", saled_americano_cnt);
+        espresso_sale = new objListReport("에스프레소 매출", String.valueOf(saled_espresso_cnt * espresso_cost));
+        latte_sale = new objListReport("라떼 매출", String.valueOf(saled_latte_cnt * latte_cost));
+        americano_sale = new objListReport("아메리카노 매출", String.valueOf(saled_americano_cnt * americano_cost));
+
         m_tv_label.setText(profit);
         reportArray.clear();
         reportArray.add(espresso_sale);
         reportArray.add(latte_sale);
         reportArray.add(americano_sale);
-        reportArray.add(espresso_sell);
-        reportArray.add(latte_sell);
-        reportArray.add(americano_sell);
         m_rv_list.setAdapter(m_adapter_report);
         m_adapter_report.notifyDataSetChanged();
+        m_rv_sale_list.setVisibility(View.VISIBLE);
+        m_adapter_sale.notifyDataSetChanged();
+
     }
 
     public void selectEspresso() {
@@ -162,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             coffee -= 100;
             water -= 30;
             saled_espresso_cnt++;
+            saleSave(0);
         }
     }
 
@@ -178,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             water -= 70;
             milk -= 30;
             saled_latte_cnt++;
+            saleSave(1);
         }
     }
 
@@ -186,8 +197,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             m_tv_label.setText("원두가 부족합니다.");
         else if (water < 100)
             m_tv_label.setText("물이 부족합니다.");
-        coffee -= 100;
-        water -= 30;
-        saled_americano_cnt++;
+        else {
+            m_tv_label.setText("주문이 완료되었습니다.");
+            coffee -= 100;
+            water -= 100;
+            saled_americano_cnt++;
+            saleSave(2);
+        }
+    }
+
+    public void saleSave(int type) {
+        time = new Date();
+        if (type == 0)
+            sale_report = new objListSale("에스프레소", date_format.format(time));
+        else if (type == 1)
+            sale_report = new objListSale("라떼", date_format.format(time));
+        else if (type == 2)
+            sale_report = new objListSale("아메리카노", date_format.format(time));
+        saleArray.add(sale_report);
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    public void listClear() {
+        m_rv_sale_list.setVisibility(View.GONE);
+        stockArray.clear();
+        reportArray.clear();
+        m_adapter_stock.notifyDataSetChanged();
+        m_adapter_sale.notifyDataSetChanged();
     }
 }
