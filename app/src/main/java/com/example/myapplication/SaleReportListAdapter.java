@@ -26,7 +26,7 @@ public class SaleReportListAdapter  extends RecyclerView.Adapter<ReportListAdapt
     @NonNull
     @Override
     public ReportListAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_sale, parent, false);
         ReportListAdapter.CustomViewHolder holder = new ReportListAdapter.CustomViewHolder(view);
 
         return holder;

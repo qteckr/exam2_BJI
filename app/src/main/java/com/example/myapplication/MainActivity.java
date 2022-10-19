@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     objListReport americano_sale;
     objListSale sale_report;
 
-    SimpleDateFormat date_format = new SimpleDateFormat("yyyy년 MM월dd일 HH시mm분ss초");
+    SimpleDateFormat date_format = new SimpleDateFormat("yyyy년 MM월dd일 HH시mm분");
     Date time;
 
     @Override
